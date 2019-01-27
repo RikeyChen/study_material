@@ -20,7 +20,7 @@ const findAndReplacePattern = function (words, pattern) {
 };
 
 // If input was "(()))" the result is easy because it's only missing 1 left paren, but if your input was ")))((", you can't just get the difference of the left and brackets now because each ")" needs a previous "(" and each "(" needs a later ")". Thus, each ")" will add to the result if there is no previous "(", otherwise you can just subtract from leftBrackets because that would be considered a valid bracket.
-let minAddToMakeBracketsValid = function (S) {
+const minAddToMakeBracketsValid = function (S) {
   let leftBrackets = 0;
   let result = 0;
   for (i = 0; i < S.length; i++) {
@@ -31,4 +31,24 @@ let minAddToMakeBracketsValid = function (S) {
     }
   }
   return leftBrackets + result;
+};
+
+
+var constructMaximumBinaryTree = function (nums) {
+  if (nums.length === 0) return null;
+  if (nums.length === 1) return new TreeNode(nums[0]);
+  let rootVal = null;
+  let rootIdx;
+  for (i = 0; i < nums.length; i++) {
+    if (rootVal === null || nums[i] > rootVal) {
+      rootVal = nums[i];
+      rootIdx = i;
+    }
+  }
+  const root = new TreeNode(rootVal);
+
+  root.left = constructMaximumBinaryTree(nums.slice(0, rootIdx));
+  root.right = constructMaximumBinaryTree(nums.slice(rootIdx + 1, nums.length));
+
+  return root;
 };
