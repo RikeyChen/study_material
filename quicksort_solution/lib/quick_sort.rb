@@ -7,7 +7,7 @@ class QuickSort
     return arr if arr.length < 1
     new_pivot = rand(arr.length)
     arr[0], arr[new_pivot] = arr[new_pivot], arr[0]
-    pitvot = arr.first
+    pivot = arr.first
     left = arr.select { |el| pivot > el }
     middle = [pivot]
     right = arr.select { |el| pivot < el}
