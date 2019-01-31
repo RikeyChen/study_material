@@ -80,3 +80,35 @@ var rangeSumBST = function (root, L, R) {
 
   return sum;
 };
+
+let totalFruit = function (tree) {
+  let finalCount = 0;
+  let currSet = {};
+  let currCount = 0;
+  let currDistinctFruit = 0;
+  let secondFruitStartIdx = 0;
+  let secondFruit = 0;
+  for (let i = 0; i < tree.length; i++) {
+    if (currSet[tree[i]]) {
+      currCount += 1;
+      if (finalCount < currCount) finalCount = currCount;
+    } else if (currDistinctFruit < 2) {
+        if (currDistinctFruit === 1) {
+          secondFruitStartIdx = i;
+          secondFruit = tree[i];
+        }
+        currDistinctFruit += 1;
+        currSet[tree[i]] = true;
+        currCount += 1;
+      } else {
+        if (finalCount < currCount) {
+          finalCount = currCount;
+        }
+        currCount = (i - secondFruitStartIdx) + 1;
+        secondFruitStartIdx = i;
+        secondFruit = tree[i];
+        currSet = { [secondFruit]: true, [tree[i]]: true };
+      }
+  }
+  return finalCount;
+};
