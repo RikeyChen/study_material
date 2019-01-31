@@ -81,7 +81,7 @@ var rangeSumBST = function (root, L, R) {
   return sum;
 };
 
-const totalFruit = function (tree) {
+const totalFruit = (tree) => {
   let finalCount = 0;
   let currSet = {};
   let currCount = 0;
