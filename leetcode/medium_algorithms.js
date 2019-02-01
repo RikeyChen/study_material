@@ -81,34 +81,66 @@ var rangeSumBST = function (root, L, R) {
   return sum;
 };
 
-const totalFruit = (tree) => {
-  let finalCount = 0;
-  let currSet = {};
-  let currCount = 0;
-  let currDistinctFruit = 0;
-  let secondFruitStartIdx = 0;
-  let secondFruit = 0;
-  for (let i = 0; i < tree.length; i++) {
-    if (currSet[tree[i]]) {
-      currCount += 1;
-      if (finalCount < currCount) finalCount = currCount;
-    } else if (currDistinctFruit < 2) {
-      if (currDistinctFruit === 1) {
-        secondFruitStartIdx = i;
-        secondFruit = tree[i];
-      }
-      currDistinctFruit += 1;
-      currSet[tree[i]] = true;
-      currCount += 1;
-    } else {
-      if (finalCount < currCount) {
-        finalCount = currCount;
-      }
-      currCount = (i - secondFruitStartIdx) + 1;
-      secondFruitStartIdx = i;
-      secondFruit = tree[i];
-      currSet = { [secondFruit]: true, [tree[i]]: true };
+// const totalFruit = (tree) => {
+//   let finalCount = 0;
+//   let currSet = {};
+//   let currCount = 0;
+//   let currDistinctFruit = 0;
+//   let secondFruitStartIdx = 0;
+//   let secondFruit = 0;
+//   for (let i = 0; i < tree.length; i++) {
+//     if (currSet[tree[i]]) {
+//       currCount += 1;
+//       if (finalCount < currCount) finalCount = currCount;
+//     } else if (currDistinctFruit < 2) {
+//       if (currDistinctFruit === 1) {
+//         secondFruitStartIdx = i;
+//         secondFruit = tree[i];
+//       }
+//       currDistinctFruit += 1;
+//       currSet[tree[i]] = true;
+//       currCount += 1;
+//     } else {
+//       if (finalCount < currCount) {
+//         finalCount = currCount;
+//       }
+//       currCount = (i - secondFruitStartIdx) + 1;
+//       secondFruitStartIdx = i;
+//       secondFruit = tree[i];
+//       currSet = { [secondFruit]: true, [tree[i]]: true };
+//     }
+//   }
+//   return finalCount;
+// };
+
+const addTwoNumbers = (l1, l2) => {
+  if (!l1 && !l2) return 0;
+  const head = l1;
+  let remainder = 0;
+  let prevl1;
+  let prevl2;
+  while (l1 || l2) {
+    if (!l1) {
+      l1 = new ListNode(0);
+      prevl1.next = l1;
     }
+
+    if (!l2) {
+      l2 = new ListNode(0);
+      prevl2.next = l2;
+    }
+
+    l1.val += l2.val + remainder;
+    remainder = 0;
+    if (l1.val >= 10) {
+      l1.val %= 10;
+      remainder = 1;
+    }
+    prevl1 = l1;
+    prevl2 = l2;
+    l1 = l1.next;
+    l2 = l2.next;
   }
-  return finalCount;
+  if (remainder > 0) prevl1.next = new ListNode(remainder);
+  return head;
 };
