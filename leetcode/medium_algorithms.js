@@ -144,3 +144,31 @@ const addTwoNumbers = (l1, l2) => {
   if (remainder > 0) prevl1.next = new ListNode(remainder);
   return head;
 };
+
+
+let numIslands = function (grid) {
+  let count = 0;
+  if (grid.length === 0) return 0;
+
+  for (i = 0; i < grid.length; i++) {
+    for (j = 0; j < grid[0].length; j++) {
+      if (grid[i][j] === '1') {
+        count++;
+        dfs(grid, i, j);
+      }
+    }
+  }
+  return count;
+};
+
+const dfs = (grid, i, j) => {
+  if (i < 0 || i >= grid.length || j < 0 || j >= grid[0].length || grid[i][j] !== '1') {
+    return;
+  }
+
+  grid[i][j] = -1;
+  dfs(grid, i - 1, j);
+  dfs(grid, i + 1, j);
+  dfs(grid, i, j - 1);
+  dfs(grid, i, j + 1);
+};
