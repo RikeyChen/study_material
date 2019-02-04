@@ -109,3 +109,15 @@ var maxSubArray = function (nums) {
 
   return maxSum;
 };
+
+var reverseList = function (head) {
+  let currNode = head;
+  let prevNode = null;
+  while (currNode) {
+    let nextNode = currNode.next;
+    currNode.next = prevNode;
+    prevNode = currNode;
+    currNode = nextNode;
+  }
+  return prevNode;
+};
