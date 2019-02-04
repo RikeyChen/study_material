@@ -53,3 +53,27 @@ var mergeTwoLists = function (l1, l2) {
 
   return head;
 };
+
+// dynamic programming problem
+
+const maxProfit = (prices) => {
+  if (prices.length === 0) return 0;
+  let profit = 0;
+  let tempLow = prices[0];
+  let tempHigh = prices[0];
+
+  for (i = 1; i < prices.length; i++) {
+    if (prices[i] < tempLow) {
+      tempLow = prices[i];
+      tempHigh = prices[i];
+    }
+
+    if (prices[i] > tempHigh) {
+      tempHigh = prices[i];
+    }
+
+    if (tempHigh - tempLow > profit) profit = tempHigh - tempLow;
+  }
+
+  return profit;
+};
