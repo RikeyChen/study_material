@@ -77,3 +77,16 @@ const maxProfit = (prices) => {
 
   return profit;
 };
+
+// maxDepth n-ary tree;
+var maxDepth = function(root) {
+    if (!root) return 0;
+    if (!root.children.length) return 1;
+    let depth = 0;
+
+    root.children.forEach(child => {
+        depth = Math.max(maxDepth(child), depth)
+    })
+
+    return depth + 1;
+};
