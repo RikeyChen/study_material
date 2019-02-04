@@ -201,17 +201,17 @@ const palindrome = (s) => {
 var longestPalindrome = function (s) {
   /* Preprocess s: insert '#' between characters, so we don't need to worry about even or odd length palindromes. */
   let newStr = '#';
-  for (var i = 0; i < s.length; i++) newStr += `${s.charAt(i)  }#`;
+  for (var i = 0; i < s.length; i++) newStr += `${s.charAt(i)}#`;
   /* Process newStr */
   /* dp[i] is the length of LPS centered at i */
-  let dp = [];
+  const dp = [];
   /**
    * For better understanding, here we define "friend substring", or "friend":
    * "friend substring" has the largest end-index in all checked substrings that
    * are palindromes. We start at friendCenter = 0 and update it in each cycles.
    */
-  let friendCenter = 0; var friendRadius = 0; var lpsCenter = 0; var 
-lpsRadius = 0;
+  let friendCenter = 0; let friendRadius = 0; let lpsCenter = 0; let
+    lpsRadius = 0;
   /* j is the symmetry of i with respect to friendCenter */
   let j;
   for (var i = 0; i < newStr.length; i++) {
@@ -255,4 +255,19 @@ lpsRadius = 0;
     }
   }
   return s.substring((lpsCenter - lpsRadius + 1) / 2, (lpsCenter + lpsRadius - 1) / 2);
+};
+
+// Longest Increasing Subsequence
+const lengthOfLIS = (nums) => {
+  if (nums.length === 0) return 0;
+  const seqLengths = nums.map(num => 1);
+
+  for (i = 1; i < nums.length; i++) {
+    for (j = 0; j < i; j++) {
+      if (nums[j] < nums[i] && seqLengths[i] < seqLengths[j] + 1) {
+        seqLengths[i] = seqLengths[j] + 1;
+      }
+    }
+  }
+  return Math.max(...seqLengths);
 };
