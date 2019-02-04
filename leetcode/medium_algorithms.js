@@ -271,3 +271,15 @@ const lengthOfLIS = (nums) => {
   }
   return Math.max(...seqLengths);
 };
+
+// Swap every two adjacent nodes
+var swapPairs = function (head) {
+  if (head === null || head.next === null) return head;
+
+  const thirdNode = head.next.next;
+  const nextNode = head.next;
+  nextNode.next = head;
+  head.next = swapPairs(thirdNode);
+
+  return nextNode;
+};
