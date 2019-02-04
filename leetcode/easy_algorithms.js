@@ -90,3 +90,22 @@ var maxDepth = function(root) {
 
     return depth + 1;
 };
+
+var maxSubArray = function (nums) {
+  if (nums.length === 0) return 0;
+
+  let maxSum;
+  let currSum = 0;
+
+  for (i = 0; i < nums.length; i++) {
+    currSum += nums[i];
+    if (maxSum === undefined) {
+      maxSum = currSum;
+    }
+
+    if (currSum > maxSum) maxSum = currSum;
+    if (currSum < 0) currSum = 0;
+  }
+
+  return maxSum;
+};
