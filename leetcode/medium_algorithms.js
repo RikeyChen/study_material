@@ -283,3 +283,26 @@ var swapPairs = function (head) {
 
   return nextNode;
 };
+
+// Basic Calculator II
+const calculate = (s) => {
+  let num = "";
+  let stack = [];
+
+  for (i = 0; i < s.length; i++) {
+    if (s[i] === ' ') continue;
+    if (s[i] === '+') {
+      stack.push(parseInt(num));
+      num = "";
+    } else if (s[i] === '-') {
+      stack.push(parseInt(-num));
+      num = "";
+    } else if (s[i] === '*') {
+
+    } else if (s[i] === '/') {
+
+    } else {
+      num += s[i];
+    }
+  }
+};
