@@ -288,7 +288,7 @@ var swapPairs = function (head) {
 const calculate = (s) => {
   let num = "";
   let stack = [];
-
+  let op;
   for (i = 0; i < s.length; i++) {
     if (s[i] === ' ') continue;
     if (s[i] === '+') {
@@ -297,12 +297,22 @@ const calculate = (s) => {
     } else if (s[i] === '-') {
       stack.push(parseInt(-num));
       num = "";
-    } else if (s[i] === '*') {
-
-    } else if (s[i] === '/') {
-
+    } else if (s[i] === '*' || s[i] === '/') {
+      if (op === null) {
+        op = s[i];
+        continue;
+      }
+      if (s[i] === '*') {
+        stack.push(Math.floor(stack.pop() * num));
+        op = null;
+      } else if (s[i] === '/') {
+        stack.push(Math.floor(stack.pop() / num));
+        op = null;
+      }
     } else {
       num += s[i];
     }
   }
+
+  return stack.reduce((sum, num) => sum += num, 0)
 };
