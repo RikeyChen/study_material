@@ -286,9 +286,9 @@ var swapPairs = function (head) {
 
 // Basic Calculator II
 const calculate = (s) => {
-  let num = "";
-  let stack = [];
-  let op = "+";
+  let num = '';
+  const stack = [];
+  let op = '+';
   for (i = 0; i < s.length; i++) {
     if (!isNaN(parseInt(s[i]))) {
       num += s[i];
@@ -302,17 +302,17 @@ const calculate = (s) => {
       } else if (op === '*') {
         stack.push(Math.floor(stack.pop() * parseInt(num)));
       } else if (op === '/') {
-        let lastNum = stack.pop();
+        const lastNum = stack.pop();
         if (lastNum < 0 || parseInt(num) < 0) {
-          stack.push(Math.round(lastNum / parseInt(num)));
+          stack.push(Math.ceil(lastNum / parseInt(num)));
         } else {
           stack.push(Math.floor(lastNum / parseInt(num)));
         }
       }
       op = s[i];
-      num = "";
+      num = '';
     }
   }
 
-  return stack.reduce((sum, num) => sum += num, 0)
+  return stack.reduce((sum, num) => sum += num, 0);
 };
