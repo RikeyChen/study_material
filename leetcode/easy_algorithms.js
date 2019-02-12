@@ -121,3 +121,14 @@ var reverseList = function (head) {
   }
   return prevNode;
 };
+
+// Linked List Cycle
+const hasCycle = (head) => {
+  let node = head;
+  while (node) {
+    if (node.visited) return true;
+    node.visited = true;
+    node = node.next;
+  }
+  return false;
+};
