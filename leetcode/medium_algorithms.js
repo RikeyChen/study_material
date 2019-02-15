@@ -113,6 +113,33 @@ var rangeSumBST = function (root, L, R) {
 //   return finalCount;
 // };
 
+var totalFruit = function (tree) {
+  let start = 0, end = 0
+  let seen = { [tree[0]]: 1 }
+  let window = 1;
+
+  for (i = 1; i < tree.length; i++) {
+    if (seen[tree[i]]) {
+      seen[tree[i]] += 1
+    } else {
+      seen[tree[i]] = 1
+    }
+
+    end += 1;
+
+    while (Object.keys(seen).length > 2) {
+      seen[tree[start]] -= 1
+      if (seen[tree[start]] === 0) delete seen[tree[start]]
+      start += 1
+    }
+
+    if (end - start + 1 > window) {
+      window = end - start + 1
+    }
+  }
+  return window
+};
+
 const addTwoNumbers = (l1, l2) => {
   if (!l1 && !l2) return 0;
   const head = l1;
