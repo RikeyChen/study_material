@@ -122,6 +122,15 @@ var reverseList = function (head) {
   return prevNode;
 };
 
+// recursive way
+var reverseList = function (head) {
+  if (!head || !head.next) return head;
+  let reversed = reverseList(head.next);
+  head.next.next = head;
+  head.next = null;
+  return reversed;
+};
+
 // Linked List Cycle
 const hasCycle = (head) => {
   if (!head) return false
