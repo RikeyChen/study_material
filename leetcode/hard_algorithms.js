@@ -16,3 +16,32 @@ var findMedianSortedArrays = function (nums1, nums2) {
     return combinedArray[mid];
   }
 };
+
+var findMedianSortedArrays = function (nums1, nums2) {
+  let totalLength = nums1.length + nums2.length
+  let idx1 = 0;
+  let idx2 = 0;
+  let currNum;
+  let lastNum;
+
+  while (idx1 + idx2 <= totalLength / 2) {
+    if (currNum) {
+      lastNum = currNum;
+    }
+
+    if (nums1[idx1] === undefined) {
+      currNum = nums2[idx2]
+      idx2++
+    } else if (nums2[idx2] === undefined) {
+      currNum = nums1[idx1]
+      idx1++
+    } else if (nums1[idx1] < nums2[idx2]) {
+      currNum = nums1[idx1]
+      idx1++
+    } else {
+      currNum = nums2[idx2]
+      idx2++
+    }
+  }
+  return totalLength % 2 === 0 ? (currNum + lastNum) / 2 : currNum
+};
