@@ -133,3 +133,20 @@ const hasCycle = (head) => {
   }
   return false;
 };
+
+// Pascal's Triangle
+const pascalsTriangle = (numRows) => {
+  if (numRows === 0) return [];
+  if (numRows === 1) return [[1]];
+  let result = [[1], [1, 1]];
+
+  while (result.length !== numRows) {
+    let currRow = [];
+    let lastRow = result[result.length - 1]
+    for (i = 0; i < lastRow.length - 1; i++) {
+      currRow.push(lastRow[i] + lastRow[i + 1])
+    }
+    result.push([1].concat(currRow).concat([1]))
+  }
+  return result;
+};
