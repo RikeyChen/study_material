@@ -159,3 +159,17 @@ const pascalsTriangle = (numRows) => {
   }
   return result;
 };
+
+// Range Sum Query - Immutable
+
+var NumArray = function (nums) {
+  this.nums = nums;
+};
+
+NumArray.prototype.sumRange = function (i, j) {
+  let sum = 0;
+  for (currIdx = i; currIdx <= j; currIdx++) {
+    sum += this.nums[currIdx]
+  }
+  return sum;
+};
