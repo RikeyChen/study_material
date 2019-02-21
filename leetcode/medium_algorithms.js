@@ -364,21 +364,26 @@ const productExceptSelf = function (nums) {
 
 
 // merge intervals
-let merge = function (intervals) {
-  if (intervals.length === 0) return [];
-  const stack = [intervals[0]];
-  for (i = 1; i < intervals.length; i++) {
-    if (intervals[i].start <= stack[stack.length - 1].start) {
-      const lastInterval = stack.pop();
-      if (intervals[i].end < lastInterval.end) intervals[i].end = lastInterval.end;
-      stack.push(intervals[i]);
-    } else if (intervals[i].start <= stack[stack.length - 1].end) {
-      const lastInterval = stack.pop();
-      if (lastInterval.end < intervals[i].end) lastInterval.end = intervals[i].end;
-      stack.push(lastInterval);
+const merge = (intervals) => {
+  if (intervals.length === 0) return intervals;
+  const sortedIntervals = intervals.sort((a, b) => {
+    if (a.start < b.start) {
+      return -1;
+    } if (a.start > b.start) {
+      return 1;
+    } return 0;
+  });
+
+  const merged = [sortedIntervals[0]];
+
+  for (i = 1; i < sortedIntervals.length; i++) {
+    if (sortedIntervals[i].start <= merged[merged.length - 1].end) {
+      if (sortedIntervals[i].end > merged[merged.length - 1].end) {
+        merged[merged.length - 1].end = sortedIntervals[i].end;
+      }
     } else {
-      stack.push(intervals[i]);
+      merged.push(sortedIntervals[i]);
     }
   }
-  return stack;
+  return merged;
 };
