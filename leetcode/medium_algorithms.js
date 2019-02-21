@@ -113,9 +113,9 @@ var rangeSumBST = function (root, L, R) {
 //   return finalCount;
 // };
 
-let totalFruit = function (tree) {
-  let start = 0; let 
-end = 0;
+const totalFruit = function (tree) {
+  let start = 0; let
+    end = 0;
   const seen = { [tree[0]]: 1 };
   let window = 1;
 
@@ -345,7 +345,7 @@ const calculate = (s) => {
   return stack.reduce((sum, num) => sum += num, 0);
 };
 
-let productExceptSelf = function (nums) {
+const productExceptSelf = function (nums) {
   const result = [];
   let leftProd = 1;
   let rightProd = 1;
@@ -360,4 +360,25 @@ let productExceptSelf = function (nums) {
     rightProd *= nums[j];
   }
   return result;
+};
+
+
+// merge intervals
+let merge = function (intervals) {
+  if (intervals.length === 0) return [];
+  const stack = [intervals[0]];
+  for (i = 1; i < intervals.length; i++) {
+    if (intervals[i].start <= stack[stack.length - 1].start) {
+      const lastInterval = stack.pop();
+      if (intervals[i].end < lastInterval.end) intervals[i].end = lastInterval.end;
+      stack.push(intervals[i]);
+    } else if (intervals[i].start <= stack[stack.length - 1].end) {
+      const lastInterval = stack.pop();
+      if (lastInterval.end < intervals[i].end) lastInterval.end = intervals[i].end;
+      stack.push(lastInterval);
+    } else {
+      stack.push(intervals[i]);
+    }
+  }
+  return stack;
 };
