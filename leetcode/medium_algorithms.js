@@ -387,3 +387,19 @@ const merge = (intervals) => {
   }
   return merged;
 };
+
+// classic coin change - not leetcode
+const coinChange = (coins, amount) => {
+  const combinations = [1];
+
+  for (let coinsIdx = 0; coinsIdx < coins.length; coinsIdx++) {
+    for (let currAmount = 1; currAmount <= amount; currAmount++) {
+      if (!combinations[currAmount]) combinations[currAmount] = 0;
+      if (currAmount >= coins[coinsIdx]) {
+        combinations[currAmount] += combinations[currAmount - coins[coinsIdx]];
+      }
+    }
+  }
+
+  return combinations[amount];
+};
