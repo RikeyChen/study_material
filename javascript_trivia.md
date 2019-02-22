@@ -5,6 +5,7 @@
     - Define what child will inherit on prototype object.
     - Child looks through own methods first than check prototype chain.
     - Stored pointer at parent’s prototype method. Chain .call
+    - Memory use is less than class inheritance because class inheritance copies down the function onto the child class each time a child is initialized, whereas prototypal inheritance only sets a pointer to the prototype method.
 
 - Single threaded meaning no ability to run things in parallel.
 - Concurrent = capable to delegating multiple tasks concurrently
