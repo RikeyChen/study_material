@@ -29,3 +29,20 @@ const throttle = (callback, wait, immediate = false) => {
     }
   };
 };
+
+// Reflow efficiency in the DOM
+// It is much more efficient to append nodes to a documentFragment and then
+// append that document fragment to the actual DOM because it only calls for
+// one reflow, whereas appending nodes each time would call for multiple reflows
+// For example:
+const parentNode = document.getElementById('parent');
+
+//create fragment:
+const newChild = document.createElement('div');
+const newGrandChild = document.createElement('p');
+// better to createTextNode instead of innerText or textContent because it
+// escapes html characters to prevent XSS attacks
+const newTextNode = document.createTextNode('I AM THE GRANDCHILD');
+newGrandChild.appendChild(newTextNode);
+newChild.appendChild(newGrandChild);
+parentNode.appendChild(newChild);
