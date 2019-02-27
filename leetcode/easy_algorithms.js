@@ -187,3 +187,32 @@ var NumArray = function (nums) {
 NumArray.prototype.sumRange = function (i, j) {
   return this.sums[j] - (i > 0 ? this.sums[i - 1] : 0)
 };
+
+var isValid = function (s) {
+  const leftBrackets = {
+    "]": "[",
+    "}": "{",
+    ")": "("
+  }
+
+  const bracketsCount = {};
+
+  for (i = 0; i < s.length; i++) {
+    if (s[i] === "]" || s[i] === ")" || s[i] === "}") {
+      if (bracketsCount[leftBrackets[s[i]]] === undefined || bracketsCount[leftBrackets[s[i]]] <= 0) {
+        return false;
+      } else {
+        bracketsCount[leftBrackets[s[i]]]--
+      }
+    } else {
+      bracketsCount[s[i]] = bracketsCount[s[i]] === undefined ? 1 : bracketsCount[s[i]]++
+    }
+  }
+
+  for (let bracket in bracketsCount) {
+    if (bracketsCount[bracket] !== 0) {
+      return false
+    }
+  }
+  return true;
+};
