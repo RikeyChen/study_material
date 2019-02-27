@@ -189,12 +189,6 @@ NumArray.prototype.sumRange = function (i, j) {
 };
 
 var isValid = function (s) {
-  const leftBrackets = {
-    "[": "]",
-    "{": "}",
-    "(": ")"
-  }
-
   const rightBrackets = {
     "]": "[",
     "}": "{",
@@ -204,13 +198,11 @@ var isValid = function (s) {
   const stack = [];
 
   for (i = 0; i < s.length; i++) {
-    if (leftBrackets[s[i]]) {
-      stack.push(s[i]);
-    } else {
+    if (rightBrackets[s[i]]) {
       if (stack[stack.length - 1] === rightBrackets[s[i]]) {
         stack.pop();
       } else return false;
-    }
+    } else stack.push(s[i]);
   }
-  return stack.length > 0 ? false : true;
+  return stack.length === 0
 };
