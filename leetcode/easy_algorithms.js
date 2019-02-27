@@ -190,29 +190,27 @@ NumArray.prototype.sumRange = function (i, j) {
 
 var isValid = function (s) {
   const leftBrackets = {
+    "[": "]",
+    "{": "}",
+    "(": ")"
+  }
+
+  const rightBrackets = {
     "]": "[",
     "}": "{",
     ")": "("
   }
 
-  const bracketsCount = {};
+  const stack = [];
 
   for (i = 0; i < s.length; i++) {
-    if (s[i] === "]" || s[i] === ")" || s[i] === "}") {
-      if (bracketsCount[leftBrackets[s[i]]] === undefined || bracketsCount[leftBrackets[s[i]]] <= 0) {
-        return false;
-      } else {
-        bracketsCount[leftBrackets[s[i]]]--
-      }
+    if (leftBrackets[s[i]]) {
+      stack.push(s[i]);
     } else {
-      bracketsCount[s[i]] = bracketsCount[s[i]] === undefined ? 1 : bracketsCount[s[i]]++
+      if (stack[stack.length - 1] === rightBrackets[s[i]]) {
+        stack.pop();
+      } else return false;
     }
   }
-
-  for (let bracket in bracketsCount) {
-    if (bracketsCount[bracket] !== 0) {
-      return false
-    }
-  }
-  return true;
+  return stack.length > 0 ? false : true;
 };
