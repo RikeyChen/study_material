@@ -206,3 +206,24 @@ var isValid = function (s) {
   }
   return stack.length === 0
 };
+
+var licenseKeyFormatting = function (S, K) {
+  let result = "";
+  const noDashChars = S.split("-").join("");
+
+  if (noDashChars.length % 2 === 0) {
+    for (i = 0; i < noDashChars.length; i++) {
+      if (i !== 0 && i % K === 0) result += "-"
+      result += noDashChars[i].toUpperCase();
+    }
+  } else {
+    for (j = 0; j < K - 1; j++) {
+      result += noDashChars[j];
+    }
+
+    for (i = K - 1; i < noDashChars.length; i++) {
+      result += noDashChars[i].toUpperCase();
+    }
+  }
+  return result;
+};
