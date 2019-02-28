@@ -209,21 +209,11 @@ var isValid = function (s) {
 
 var licenseKeyFormatting = function (S, K) {
   let result = "";
-  const noDashChars = S.split("-").join("");
+  let noDashChars = S.split("-").join("").toUpperCase();
 
-  if (noDashChars.length % 2 === 0) {
-    for (i = 0; i < noDashChars.length; i++) {
-      if (i !== 0 && i % K === 0) result += "-"
-      result += noDashChars[i].toUpperCase();
-    }
-  } else {
-    for (j = 0; j < K - 1; j++) {
-      result += noDashChars[j];
-    }
-
-    for (i = K - 1; i < noDashChars.length; i++) {
-      result += noDashChars[i].toUpperCase();
-    }
+  for (i = noDashChars.length - 1; i >= 0; i--) {
+    if ((i + 1) % K === 0 && i !== noDashChars.length - 1) result = "-" + result;
+    result = noDashChars[i] + result;
   }
   return result;
 };
