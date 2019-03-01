@@ -223,3 +223,24 @@ var licenseKeyFormatting = function(S, K) {
     }
     return result;
 };
+
+// merge sorted arrays in place
+var merge = function (nums1, m, nums2, n) {
+  let i = 0, j = 0;
+  while (i < m) {
+    if (nums2[j] < nums1[i]) {
+      [nums1[i], nums2[j]] = [nums2[j], nums1[i]];
+      j++
+    }
+    i++;
+  }
+
+  j = 0;
+  while (i < nums1.length) {
+    nums1[i] = nums2[j]
+    i++;
+    j++;
+  }
+
+  return nums1;
+};
