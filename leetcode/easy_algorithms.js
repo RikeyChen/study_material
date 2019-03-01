@@ -207,13 +207,19 @@ var isValid = function (s) {
   return stack.length === 0
 };
 
-var licenseKeyFormatting = function (S, K) {
-  let result = "";
-  let noDashChars = S.split("-").join("").toUpperCase();
+var licenseKeyFormatting = function(S, K) {
+    let result = "";
+    let currWindowSize = 0;
+    const upperCasedStr = S.toUpperCase();
 
-  for (i = noDashChars.length - 1; i >= 0; i--) {
-    if ((i + 1) % K === 0 && i !== noDashChars.length - 1) result = "-" + result;
-    result = noDashChars[i] + result;
-  }
-  return result;
+    for (i = S.length - 1; i >= 0; i--) {
+        if (upperCasedStr[i] === "-") continue;
+        if (currWindowSize === K) {
+            result = "-" + result;
+            currWindowSize = 0;
+        }
+        result = upperCasedStr[i] + result;
+        currWindowSize++;
+    }
+    return result;
 };
