@@ -247,15 +247,16 @@ var merge = function (nums1, m, nums2, n) {
 
 // move zeroes
 var moveZeroes = function (nums) {
-  let sorted = false;
+  let lastZeroIdx;
 
-  while (!sorted) {
-    sorted = true;
-    for (let i = 0; i < nums.length - 1; i++) {
-      if (nums[i] === 0 && nums[i + 1] !== 0) {
-        [nums[i], nums[i + 1]] = [nums[i + 1], nums[i]]
-        sorted = false
-      }
+  for (let i = 0; i < nums.length; i++) {
+    if (nums[i] === 0 && lastZeroIdx === undefined) {
+      lastZeroIdx = i;
+    }
+
+    if (nums[i] !== 0 && lastZeroIdx !== undefined) {
+      [nums[i], nums[lastZeroIdx]] = [nums[lastZeroIdx], nums[i]];
+      lastZeroIdx++;
     }
   }
   return nums;
