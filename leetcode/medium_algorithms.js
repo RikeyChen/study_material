@@ -411,17 +411,19 @@ var isValidBST = function (root) {
   let leftValid, rightValid;
   if (root.left) {
     if (root.left.val >= root.val) return false;
+    if (root.left.right && root.left.right.val >= root.val) return false;
     leftValid = isValidBST(root.left);
   }
 
   if (root.right) {
     if (root.right.val <= root.val) return false;
+    if (root.right.left && root.right.left.val <= root.val) return false;
     rightValid = isValidBST(root.right);
   }
 
   if (leftValid !== undefined && rightValid !== undefined) {
     return leftValid && rightValid
-  } if (leftValid === undefined) {
+  } else if (leftValid === undefined) {
     return rightValid
   } else return leftValid
 };
