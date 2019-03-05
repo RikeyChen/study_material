@@ -403,3 +403,25 @@ const coinChange = (coins, amount) => {
 
   return combinations[amount];
 };
+
+// isValidBST
+
+var isValidBST = function (root) {
+  if (!root || !root.left && !root.right) return true;
+  let leftValid, rightValid;
+  if (root.left) {
+    if (root.left.val >= root.val) return false;
+    leftValid = isValidBST(root.left);
+  }
+
+  if (root.right) {
+    if (root.right.val <= root.val) return false;
+    rightValid = isValidBST(root.right);
+  }
+
+  if (leftValid !== undefined && rightValid !== undefined) {
+    return leftValid && rightValid
+  } if (leftValid === undefined) {
+    return rightValid
+  } else return leftValid
+};
