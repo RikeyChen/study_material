@@ -264,14 +264,14 @@ var moveZeroes = function (nums) {
 
 // container with most water
 var maxArea = function (height) {
-  let max = 0;
-  for (i = 0; i < height.length - 1; i++) {
-    let currMax = 0;
-    for (j = i + 1; j < height.length; j++) {
-      const lower = height[i] < height[j] ? height[i] : height[j];
-      const waterAmount = (j - i) * lower;
-      if (waterAmount > max) max = waterAmount;
-    }
+  let maxArea = 0;
+  let i = 0, j = height.length - 1
+
+  while (i < j) {
+    const lowerLine = height[i] <= height[j] ? i : j;
+    const currArea = (j - i) * height[lowerLine];
+    if (currArea > maxArea) maxArea = currArea;
+    lowerLine === i ? i++ : j--;
   }
-  return max;
+  return maxArea;
 };
