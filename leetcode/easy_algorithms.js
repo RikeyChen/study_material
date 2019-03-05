@@ -261,3 +261,17 @@ var moveZeroes = function (nums) {
   }
   return nums;
 };
+
+// container with most water
+var maxArea = function (height) {
+  let max = 0;
+  for (i = 0; i < height.length - 1; i++) {
+    let currMax = 0;
+    for (j = i + 1; j < height.length; j++) {
+      const lower = height[i] < height[j] ? height[i] : height[j];
+      const waterAmount = (j - i) * lower;
+      if (waterAmount > max) max = waterAmount;
+    }
+  }
+  return max;
+};
