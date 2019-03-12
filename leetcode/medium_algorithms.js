@@ -423,7 +423,20 @@ var isValidBST = function (root) {
 
   if (leftValid !== undefined && rightValid !== undefined) {
     return leftValid && rightValid
-  } else if (leftValid === undefined) {
+  } if (leftValid === undefined) {
     return rightValid
   } else return leftValid
+};
+
+// kthSmallestElement in BST
+const inOrderTraversal = (root, order = []) => {
+  if (!root) return [];
+  const leftSolved = inOrderTraversal(root.left, order);
+  const rightSolved = inOrderTraversal(root.right, order);
+  return leftSolved.concat(root.val).concat(rightSolved);
+};
+
+let kthSmallest = function (root, k) {
+  const ordered = inOrderTraversal(root);
+  return ordered[k - 1];
 };
