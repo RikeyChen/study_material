@@ -105,3 +105,33 @@ const largestContiguousSubSum = (list) => {
 // console.log(largestContiguousSubSum([2, 3, -6, 7, -6, 7]));
 // console.log(largestContiguousSubSum([-4, -1, -3, -2]));
 // console.log(largestContiguousSubSum([0, 0]));
+
+// is_shuffle ?
+//   Given three strings, return whether the third is an interleaving of the first two.Interleaving means it only contains characters from the other two, no more no less, and preserves their character ordering. "abdecf" is an interleaving of "abc" and "def".Note that the first two strings needn't be in alphabetical order like these.
+
+// You may assume that the first two strings do not contain any characters in common.
+
+//   Next, relax the assumption that the first two strings contain no overlap.Analyze the time - complexity of your solution.You may wish to view this problem recursively.
+
+// Phase I
+// const isShuffle = (str1, str2, str3) => {
+//   let totalLength = str1.length + str2.length;
+//   if (str3.length > totalLength || str3.length < totalLength) return false;
+
+//   for (let i = 0; i < str1.length; i++) {
+//     if (str1[i] !== str3[i]) return false;
+//   }
+//   for (let j = 0; j < str2.length; j++) {
+//     if (str2[j] !== str3[j + str1.length]) return false;
+//   }
+//   return true;
+// };
+
+// console.log(isShuffle('abd', 'ecf', 'abdecf')); // => true)
+
+// Phase II
+const isShuffle = (str1, str2, str3) => {
+
+};
+
+console.log(isShuffle('XXZ', 'XXY', 'XXYXXZ')); // => true)
