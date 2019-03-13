@@ -61,3 +61,28 @@ const myMin = (list) => {
 };
 
 // console.log(myMin([0, 3, 5, 4, -5, 10, 1, 90]));
+
+// Largest Contiguous Sub - sum
+// You have an array of integers and you want to find the largest contiguous(together in sequence) sub - sum.Find the sums of all contiguous sub - arrays and return the max.
+
+// list = [2, 3, -6, 7, -6, 7]
+// largest_contiguous_subsum(list) # => 8(from[7, -6, 7])
+
+// Phase I
+// Write a function that iterates through the array and finds all sub - arrays using nested loops.First make an array to hold all sub - arrays.Then find the sums of each sub - array and return the max.
+
+// Discuss the time complexity of this solution.
+// O(n^2) - nested loops - for each element in the input, you need to create an // array every time with everyone other element
+const largestContiguousSubSum = (list) => {
+  let highestSum = list[0];
+  for (let i = 0; i < list.length; i++) {
+    let currSum = list[i];
+    for (let j = i + 1; j < list.length; j++) {
+      currSum += list[j];
+      if (currSum > highestSum) highestSum = currSum;
+    }
+  }
+  return highestSum;
+};
+
+// console.log(largestContiguousSubSum([2, 3, -6, 7, -6, 7]));
