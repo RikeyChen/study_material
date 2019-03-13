@@ -425,7 +425,7 @@ var isValidBST = function (root) {
     return leftValid && rightValid
   } if (leftValid === undefined) {
     return rightValid
-  } else return leftValid
+  } return leftValid
 };
 
 // kthSmallestElement in BST
@@ -436,7 +436,29 @@ const inOrderTraversal = (root, order = []) => {
   return leftSolved.concat(root.val).concat(rightSolved);
 };
 
-let kthSmallest = function (root, k) {
+const kthSmallest = function (root, k) {
   const ordered = inOrderTraversal(root);
   return ordered[k - 1];
+};
+
+// 3sum
+let threeSum = function (nums) {
+  const sorted = nums.sort((a, b) => a - b);
+  const unique3Sums = [];
+
+  for (i = 0; i < nums.length - 2; i++) {
+    const currSet = [nums[i]];
+    for (j = i + 1; j < nums.length - 1; j++) {
+      currSet[1] = nums[j];
+      for (k = j + 1; k < nums.length; k++) {
+        currSet[2] = nums[k];
+        const currSum = nums[i] + nums[j] + nums[k];
+        if (currSum === 0) {
+          unique3Sums.push(currSet);
+          console.log(currSet);
+        }
+      }
+    }
+  }
+  return unique3Sums;
 };
