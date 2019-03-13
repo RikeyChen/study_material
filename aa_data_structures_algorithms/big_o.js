@@ -73,16 +73,35 @@ const myMin = (list) => {
 
 // Discuss the time complexity of this solution.
 // O(n^2) - nested loops - for each element in the input, you need to create an // array every time with everyone other element
+// const largestContiguousSubSum = (list) => {
+//   let highestSum = list[0];
+//   for (let i = 0; i < list.length; i++) {
+//     let currSum = list[i];
+//     for (let j = i + 1; j < list.length; j++) {
+//       currSum += list[j];
+//       if (currSum > highestSum) highestSum = currSum;
+//     }
+//   }
+//   return highestSum;
+// };
+
+// console.log(largestContiguousSubSum([2, 3, -6, 7, -6, 7]));
+
+// Phase II
+// Let's make a better version. Write a new function using O(n) time with O(1) memory. Keep a running tally of the largest sum.
+// O(n) - operations increases as list size increases
+// only need to loop through the input list once and process for each element
 const largestContiguousSubSum = (list) => {
   let highestSum = list[0];
+  let currSum = 0;
   for (let i = 0; i < list.length; i++) {
-    let currSum = list[i];
-    for (let j = i + 1; j < list.length; j++) {
-      currSum += list[j];
-      if (currSum > highestSum) highestSum = currSum;
-    }
+    currSum += list[i];
+    if (currSum > highestSum) highestSum = currSum;
+    if (currSum < 0) currSum = 0;
   }
   return highestSum;
 };
 
 // console.log(largestContiguousSubSum([2, 3, -6, 7, -6, 7]));
+// console.log(largestContiguousSubSum([-4, -1, -3, -2]));
+// console.log(largestContiguousSubSum([0, 0]));
