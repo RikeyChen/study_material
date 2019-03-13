@@ -114,6 +114,12 @@ const largestContiguousSubSum = (list) => {
 //   Next, relax the assumption that the first two strings contain no overlap.Analyze the time - complexity of your solution.You may wish to view this problem recursively.
 
 // Phase I
+// O(n) - technically O(n) - n/2 which reduces to O(n)
+// this algorithm iterates through str1 and str2 in separate loops and compares
+// each character to see if it matches with the character at the specific
+// position in str3. If str3 is equal in length to the total of str1 and str2
+// length, then worst case is that the each character of str1 and str2 will be
+// checked. If this is the case, str3 will be half of the total input size
 // const isShuffle = (str1, str2, str3) => {
 //   let totalLength = str1.length + str2.length;
 //   if (str3.length > totalLength || str3.length < totalLength) return false;
@@ -130,8 +136,24 @@ const largestContiguousSubSum = (list) => {
 // console.log(isShuffle('abd', 'ecf', 'abdecf')); // => true)
 
 // Phase II
-const isShuffle = (str1, str2, str3) => {
+function isShuffle(str1, str2, str3) {
+  if (str3.length === 0) {
+    return str1.length === 0 && str2.length === 0;
+  }
 
-};
+  if (str1[0] === str3[0]) {
+    if (isShuffle(str1.slice(1, str1.length), str2, str3.slice(1, str1.length))) {
+      return true;
+    }
+  }
 
-console.log(isShuffle('XXZ', 'XXY', 'XXYXXZ')); // => true)
+  if (str2[0] === str3[0]) {
+    if (isShuffle(str1, str2.slice(1, str1.length), str3.slice(1, str1.length))) {
+      return true;
+    }
+  }
+
+  return false;
+}
+
+console.log(isShuffle('XXY', 'XXZ', 'XXYXXZ')); // => true)
