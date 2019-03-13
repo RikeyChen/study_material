@@ -36,14 +36,28 @@ const findMissingNumber = (arr1, arr2) => {
 // What is the time complexity for this function?
 // O(n^2) - for every element of the input, you need to compare it to every
 // other element in the input
+// const myMin = (list) => {
+//   for (let i = 0; i < list.length; i++) {
+//     let smallest = true;
+//     for (let j = 0; j < list.length; j++) {
+//       if (list[j] < list[i]) smallest = false;
+//     }
+//     if (smallest) return list[i];
+//   }
+// };
+
+// Phase II
+// Now, rewrite the function to iterate through the list just once while keeping track of the minimum.
+
+// What is the time complexity ?
+// O(n) - by keeping a pointer to smallest, you only need to iterate through
+// the input once and comparing each element to the pointer
 const myMin = (list) => {
-  for (let i = 0; i < list.length; i++) {
-    let smallest = true;
-    for (let j = 0; j < list.length; j++) {
-      if (list[j] < list[i]) smallest = false;
-    }
-    if (smallest) return list[i];
+  let smallest = list[0];
+  for (let i = 1; i < list.length; i++) {
+    if (list[i] < smallest) smallest = list[i];
   }
+  return smallest;
 };
 
 // console.log(myMin([0, 3, 5, 4, -5, 10, 1, 90]));
