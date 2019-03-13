@@ -275,3 +275,17 @@ var maxArea = function (height) {
   }
   return maxArea;
 };
+
+var longestCommonPrefix = function(strs) {
+    if (!strs.length) return ""
+    let prefix = strs[0].split("");
+
+    for (i = 1; i < strs.length; i++) {
+        for (j = prefix.length - 1; j >= 0; j--) {
+            if (strs[i][j] === undefined || strs[i][j] !== prefix[j]) {
+                prefix = prefix.slice(0, j)
+            }
+        }
+    }
+    return prefix.join("")
+};
