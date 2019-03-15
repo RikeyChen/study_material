@@ -408,7 +408,8 @@ const coinChange = (coins, amount) => {
 
 var isValidBST = function (root) {
   if (!root || !root.left && !root.right) return true;
-  let leftValid, rightValid;
+  let leftValid; let
+    rightValid;
   if (root.left) {
     if (root.left.val >= root.val) return false;
     if (root.left.right && root.left.right.val >= root.val) return false;
@@ -422,10 +423,10 @@ var isValidBST = function (root) {
   }
 
   if (leftValid !== undefined && rightValid !== undefined) {
-    return leftValid && rightValid
+    return leftValid && rightValid;
   } if (leftValid === undefined) {
-    return rightValid
-  } return leftValid
+    return rightValid;
+  } return leftValid;
 };
 
 // kthSmallestElement in BST
@@ -442,7 +443,7 @@ const kthSmallest = function (root, k) {
 };
 
 // 3sum
-let threeSum = function (nums) {
+const threeSum = function (nums) {
   const sorted = nums.sort((a, b) => a - b);
   const unique3Sums = [];
 
@@ -461,4 +462,26 @@ let threeSum = function (nums) {
     }
   }
   return unique3Sums;
+};
+
+// search in rotated array
+const search = function (nums, target) {
+  let first = 0; let 
+last = nums.length - 1;
+
+  while (first <= last) {
+    const mid = Math.floor((last - first) / 2) + first;
+    const asc = target >= nums[mid] && target <= nums[last];
+    const desc = target >= nums[mid] || target <= nums[last];
+    const isRight = nums[last] - nums[mid] >= 0 ? asc : desc;
+
+    if (nums[mid] === target) {
+      return mid;
+    } if (isRight) {
+      first = mid + 1;
+    } else {
+      last = mid - 1;
+    }
+  }
+  return -1;
 };
