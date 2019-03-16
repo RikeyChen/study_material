@@ -501,17 +501,15 @@ const letterCombinations = (digits, current = '', res = []) => {
 
   if (digits.length === 0 && current === '') return res;
 
-  if (digits.length < 1) {
-    return res.push(current);
-  }
+  if (digits.length < 1) return res.push(current);
 
-  let currentLetters; let 
-currentLetter;
+  let currentLetters; let
+    currentLetter;
 
   currentLetters = letters[digits[0]];
 
-  for (i = 0; i < currentLetters.length; i++) {
-    currentLetter = letters[digits[0]][i];
+  for (let i = 0; i < currentLetters.length; i++) {
+    currentLetter = currentLetters[i];
     letterCombinations(digits.slice(1), current + currentLetter, res);
   }
 
