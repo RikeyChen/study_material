@@ -53,7 +53,8 @@ function sumArray(array) {
 // reverseString("internet")    // => "tenretni"
 // reverseString("friends")     // => "sdneirf"
 function reverseString(str) {
-
+  if (str.length <= 1) return str;
+  return str[str.length - 1] + reverseString(str.slice(0, -1));
 }
 
 
