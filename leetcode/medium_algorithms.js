@@ -466,8 +466,8 @@ const threeSum = function (nums) {
 
 // search in rotated array
 const search = function (nums, target) {
-  let first = 0; let 
-last = nums.length - 1;
+  let first = 0; let
+    last = nums.length - 1;
 
   while (first <= last) {
     const mid = Math.floor((last - first) / 2) + first;
@@ -484,4 +484,36 @@ last = nums.length - 1;
     }
   }
   return -1;
+};
+
+// letterCombinations of phone number
+const letterCombinations = (digits, current = '', res = []) => {
+  const letters = {
+    2: ['a', 'b', 'c'],
+    3: ['d', 'e', 'f'],
+    4: ['g', 'h', 'i'],
+    5: ['j', 'k', 'l'],
+    6: ['m', 'n', 'o'],
+    7: ['p', 'q', 'r', 's'],
+    8: ['t', 'u', 'v'],
+    9: ['w', 'x', 'y', 'z'],
+  };
+
+  if (digits.length === 0 && current === '') return res;
+
+  if (digits.length < 1) {
+    return res.push(current);
+  }
+
+  let currentLetters; let 
+currentLetter;
+
+  currentLetters = letters[digits[0]];
+
+  for (i = 0; i < currentLetters.length; i++) {
+    currentLetter = letters[digits[0]][i];
+    letterCombinations(digits.slice(1), current + currentLetter, res);
+  }
+
+  return res;
 };
