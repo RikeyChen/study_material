@@ -80,7 +80,7 @@ function pow(base, exponent) {
   if (exponent > 0) {
     return pow(base, exponent - 1) * base;
   } if (exponent < 0) {
-    return (1 / (pow(base, Math.abs(exponent) - 1) * base));
+    return 1 / (pow(base, -exponent));
   }
 }
 
@@ -117,11 +117,7 @@ function flatten(data) {
   if (!(data instanceof Array)) return [data];
   const result = [];
   for (let i = 0; i < data.length; i++) {
-    if (data[i] instanceof Array) {
-      result.concat(flatten(data[i]));
-    } else {
-      result.push(data[i]);
-    }
+    result.push(...flatten(data[i]));
   }
 
   return result;
