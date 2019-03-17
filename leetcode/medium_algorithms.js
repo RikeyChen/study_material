@@ -518,7 +518,7 @@ const letterCombinations = (digits, current = '', res = []) => {
 
 // coin change 2
 const change = (amount, coins, combinations = {}) => {
-  const key = `${amount  }-${  coins}`;
+  const key = `${amount }-${coins}`;
   if (key in combinations) return combinations[key];
   if (amount === 0) return 1;
 
@@ -531,4 +531,21 @@ const change = (amount, coins, combinations = {}) => {
 
   combinations[key] = comboAmount;
   return combinations[key];
+};
+
+// wordBreak using tabulation
+let wordBreak = function (s, wordDict) {
+  const table = new Array(s.length + 1).fill(false);
+  table[0] = true;
+
+  for (let i = 0; i < table.length; i++) {
+    if (table[i] === false) continue;
+
+    for (let j = i + 1; j < table.length; j++) {
+      const word = s.slice(i, j);
+
+      if (wordDict.includes(word)) table[j] = true;
+    }
+  }
+  return table[table.length - 1];
 };
