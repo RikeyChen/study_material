@@ -163,7 +163,14 @@ function flatten(data) {
 // fileFinder(desktop, 'everlong.flac');            // => true
 // fileFinder(desktop, 'sequoia.jpeg');             // => false
 function fileFinder(directories, targetFile) {
-
+  for (const key in directories) {
+    if (key === targetFile) {
+      return true;
+    }
+    const fileFound = fileFinder(directories[key], targetFile);
+    if (fileFound) return true;
+  }
+  return false;
 }
 
 
